@@ -31,4 +31,9 @@ public class Slice {
 		}
 		return (tCount >= req && cells.size()-tCount >= req);
 	}
+	
+	public String getLine() {
+		int rMin = Integer.MAX_VALUE, rMax = 0, cMin = 0, cMax;
+		
+	}
 }

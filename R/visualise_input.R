@@ -1,6 +1,11 @@
-library(magrittr)
-library(dplyr)
-library(ggplot2)
+install_if_not_present <- function(name) if(!require(name, character.only= T)){
+        install.packages(name)
+        require(name, character.only= T)
+    }
+
+install_if_not_present("magrittr")
+install_if_not_present("dplyr")
+install_if_not_present("ggplot2")
 
 input = scan("R/medium.in", what = character(), sep = "\n")
 formats <- input[1]

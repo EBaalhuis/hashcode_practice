@@ -9,7 +9,7 @@ public class main {
 
 	// Input instances
 //	public static String[] instances = { "Example", "Small", "Medium", "Big" };
-	public static String[] instances = { "example", "small" };
+	public static String[] instances = { "example", "small", "big", "medium" };
 
 	// variables that are read from input
 	public static long totalScore;
@@ -35,9 +35,7 @@ public class main {
 			
 			// Evaluate solution locally, if needed
 			long result = evaluateSolution(outDir);
-			if (!s.equals("example")) {
-				totalScore += result;
-			}
+			totalScore += result;
 			System.err.printf("Result for instance %s: ", s);
 			System.err.println(result);
 		}
@@ -72,22 +70,28 @@ public class main {
 		slices = new ArrayList<>();
 		int _id = -1;
 		Slice curSlice = new Slice(-1);
-		for (int i = 0; i < nCols; i++) {
-			for (int j = 0; j < nRows; j++) {
+		for (int i = 0; i < nRows; i++) {
+			for (int j = 0; j < nCols; j++) {
 				if (j % maxCells == 0) {
 					// Make new slice
 					_id++;
 					curSlice = new Slice(_id);
 					slices.add(curSlice);
 				}
-				curSlice.addCell(cells[j][i]);
+				curSlice.addCell(cells[i][j]);
 			}
 		}
 	}
 
 	public static long evaluateSolution(String fileDir) {
 		// Client-side evaluation of solution
-		return 42;
+		long res = 0;
+		for (Slice s : slices) {
+			if (s.isLegal(req, maxCells)) {
+				res += s.cells.size();
+			}
+		}
+		return res;
 	}
 	
 	public static void writeOutput() {
@@ -97,7 +101,7 @@ public class main {
 				nSlices++;
 			}
 		}
-		writeLine(String.format("%d\n", nSlices));
+		writeLine(String.format("%d", nSlices));
 		
 		for (Slice s : slices) {
 			if (s.isLegal(req, maxCells)) {

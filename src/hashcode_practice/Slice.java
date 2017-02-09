@@ -33,7 +33,13 @@ public class Slice {
 	}
 	
 	public String getLine() {
-		int rMin = Integer.MAX_VALUE, rMax = 0, cMin = 0, cMax;
-		
+		int rMin = Integer.MAX_VALUE, rMax = 0, cMin = Integer.MAX_VALUE, cMax = 0;
+		for (Cell c : cells) {
+			rMin = Math.min(c.r, rMin);
+			cMin = Math.min(c.c, cMin);
+			rMax = Math.max(c.r, rMax);
+			cMax = Math.max(c.c, cMax);
+		}
+		return String.format("%d %d %d %d", rMin, cMin, rMax, cMax);
 	}
 }

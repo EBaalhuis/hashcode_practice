@@ -2,6 +2,6 @@ package hashcode_practice;
 
 public class main {
 	public static void main(String[] args) {
-		System.out.println("HALLo");
+		System.out.println("HALLO");
 	}
 }
